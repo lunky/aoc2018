@@ -21,7 +21,7 @@ day1 :: String -> Int
 day1 input = sum $ parseInput input
 
 parseInput :: String -> [Int]
-parseInput input = map read $ map (filter (/='+')) $ lines input
+parseInput input = map (read .filter (/='+')) $ lines input
 
 day1b :: String -> Maybe Int
 day1b input =  dup $ scanl (+) 0 $ cycle $  parseInput input
