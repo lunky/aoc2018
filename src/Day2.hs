@@ -18,8 +18,9 @@ day2b :: String -> [String]
 day2b input = take 1 $ findBox input
 
 findBox :: String -> [String]
-findBox input = filter (\y-> length y == oneLess) $ concatMap matches (tails $ parseinput input)
-        where  oneLess = length (head parsedBoxes) -1
+findBox input = filter (\y-> length y == oneLess) $ concatMap matches (tails parsedBoxes)
+        where   parsedBoxes = parseInput input
+                oneLess = length (head parsedBoxes) -1
 
 matches :: Eq a => [[a]] -> [[a]]
 matches [] =  [[]]
