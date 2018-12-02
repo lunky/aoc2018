@@ -1,3 +1,3 @@
-# Changelog for aoc
+# Changelog for aoc2018
 
 ## Unreleased changes
