@@ -14,3 +14,8 @@ spec =  do
             let input = "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2"
             let expected = 4
             day3 input `shouldBe` expected
+    describe "dayb3" $ 
+        it "should get test case " $ do
+            let input = "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2"
+            let expected = 3
+            day3b input `shouldBe` expected

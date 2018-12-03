@@ -12,10 +12,16 @@ sample = "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2"
 day3 :: String -> Int
 day3 input = length $ getOverlap input 
 
-getOverlap input = filter (\y -> length y >1) $groupBy(\(x,_) (y,_) -> x == y) $ sortBy (\(x,_) (y,_) -> compare x y) $  concatMap (points . parseClaim)  $ lines input
+getOverlap :: String -> [[((Int,Int), String)]]
+getOverlap input = filter (\y -> length y >1) $ groupByPoint $ plotPoints
+    where plotPoints = concatMap (points . parseClaim)  $ lines input
+          groupByPoint input = groupBy(\(x,_) (y,_) -> x == y) $ sortBy (\(x,_) (y,_) -> compare x y) input
+    
 
-parseInput input = length $ lines input
+parseInput :: String -> [String]
+parseInput = lines 
 
+parseClaim :: String -> (String,(Int,Int),(Int,Int))
 parseClaim input = (claim,coords,gridSize)
     where claimData = words input
           claim = head claimData
@@ -30,7 +36,8 @@ points (name, (x,y), (width, height)) = map  (,name) [(a,b)  | a <- [x..x+width-
 
 getGridSize :: String -> (Int,Int)
 getGridSize input = read ("(" ++ map (\y -> if y =='x' then ',' else y) input ++ ")")
-day3b :: String -> String 
-day3b input =  head $ foldr  delete claims overlaped
-    where claims = map (\(a,_,_) -> a) $ map parseClaim $ lines input
+
+day3b :: String -> Int 
+day3b input =  read $ filter (/='#') $ head $ foldr  delete claims overlaped
+    where claims = map ((\ (a, _, _) -> a) . parseClaim) (lines input)
           overlaped = map snd $  concat $ getOverlap input 
