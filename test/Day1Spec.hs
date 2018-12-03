@@ -5,8 +5,8 @@ import Test.Hspec
 
 spec :: Spec
 spec = do
-    describe "Lib" $ do
-        it "should run a noop test" $ do
+    describe "Lib" $ 
+        it "should run a noop test" $ 
             1 `shouldBe` 1
     describe "day1" $ do
         it "should start at zero" $ do
