@@ -13,7 +13,7 @@ day3 :: String -> Int
 day3 input = length $ getOverlap input 
 
 getOverlap :: String -> [[((Int,Int), String)]]
-getOverlap input = filter (\y -> length y >1) $ groupByPoint $ plotPoints
+getOverlap input = filter (\y -> length y >1) $ groupByPoint  plotPoints
     where plotPoints = concatMap (points . parseClaim)  $ lines input
           groupByPoint input = groupBy(\(x,_) (y,_) -> x == y) $ sortBy (\(x,_) (y,_) -> compare x y) input
     
