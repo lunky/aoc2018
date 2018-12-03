@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.0.
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 80c080a665237692f2105cba31ddeca15266d6061a2de452eaec4a3e833215b5
+-- hash: 628b43888832eae3901940cf1097cbc8278669831fc3a894cfe69ab988d149b3
 
 name:           aoc2018
 version:        0.1.0.0
@@ -30,7 +30,6 @@ library
       Day1
       Day2
       Day3
-      Lib
   other-modules:
       Paths_aoc2018
   hs-source-dirs:
@@ -46,7 +45,6 @@ executable aoc2018-exe
       Day1
       Day2
       Day3
-      Lib
       Paths_aoc2018
   hs-source-dirs:
       app
