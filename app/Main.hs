@@ -3,6 +3,7 @@ module Main where
 import Lib
 import Day1
 import Day2
+import Day3
 
 
 main :: IO ()
@@ -19,3 +20,9 @@ main = do
     putStrLn ("day2: " ++ answer)
     let answer = show $ day2b contents
     putStrLn ("day2b: " ++ answer)
+
+    contents <- readFile "data/day3.txt"
+    let answer = show $ day3 contents
+    putStrLn ("day3: " ++ answer)
+    let answer = show $ day3b contents
+    putStrLn ("day3b: " ++ answer)
