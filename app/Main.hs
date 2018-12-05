@@ -21,9 +21,9 @@ main = do
     -- let answer = show $ day2b contents
     -- putStrLn ("day2b: " ++ answer)
 
-    -- contents <- readFile "data/day3.txt"
-    -- let answer = show $ day3 contents
-    -- putStrLn ("day3: " ++ answer)
+    contents <- readFile "data/day3.txt"
+    let answer = show $ day3 contents
+    putStrLn ("day3: " ++ answer)
     -- let answer = show $ day3b contents
     -- putStrLn ("day3b: " ++ answer)
     contents <- readFile "data/day4.txt"

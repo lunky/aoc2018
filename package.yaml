@@ -21,11 +21,40 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- containers
+- megaparsec
+- text
+- unordered-containers
+- bytestring
+- hashable
+- text-metrics
+default-extensions:
+- DeriveDataTypeable
+- DeriveFunctor
+- DeriveFoldable
+- DeriveTraversable
+- StandaloneDeriving
+- FlexibleInstances
+- FlexibleContexts
+- MultiParamTypeClasses
+- FunctionalDependencies
+- TypeApplications
+- TypeFamilies
+- ConstraintKinds
+- KindSignatures
+- BangPatterns
+- LambdaCase
+- MultiWayIf
+- TupleSections
+- OverloadedStrings
+- NamedFieldPuns
+- PatternSynonyms
 
 library:
   source-dirs: src
   dependencies:
   - containers
+  - time
 
 executables:
   aoc2018-exe:
@@ -40,6 +69,7 @@ executables:
     dependencies:
     - aoc2018
     - containers
+    - time
 
 tests:
   aoc2018-test:
