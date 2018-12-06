@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9b666eb1522c80f63a5365fa4f60ca85a4fcb7e9e9dca688d7ec24c5ab8554f1
+-- hash: b122d8bef35ace91da4c1c26fd0bfaa62b1b6f410524bd5bdd6576fea36ecad8
 
 name:           aoc2018
 version:        0.1.0.0
@@ -36,16 +36,17 @@ library
       Paths_aoc2018
   hs-source-dirs:
       src
-  default-extensions: DeriveDataTypeable DeriveFunctor DeriveFoldable DeriveTraversable StandaloneDeriving FlexibleInstances FlexibleContexts MultiParamTypeClasses FunctionalDependencies TypeApplications TypeFamilies ConstraintKinds KindSignatures BangPatterns LambdaCase MultiWayIf TupleSections OverloadedStrings NamedFieldPuns PatternSynonyms
+  default-extensions: FlexibleContexts TypeFamilies ConstraintKinds NamedFieldPuns LambdaCase
   build-depends:
-      base >=4.7 && <5
+      array
+    , base >=4.7 && <5
     , bytestring
     , containers
     , hashable
     , megaparsec
+    , regex-compat
     , text
     , text-metrics
-    , time
     , unordered-containers
   default-language: Haskell2010
 
@@ -61,18 +62,19 @@ executable aoc2018-exe
   hs-source-dirs:
       app
       src
-  default-extensions: DeriveDataTypeable DeriveFunctor DeriveFoldable DeriveTraversable StandaloneDeriving FlexibleInstances FlexibleContexts MultiParamTypeClasses FunctionalDependencies TypeApplications TypeFamilies ConstraintKinds KindSignatures BangPatterns LambdaCase MultiWayIf TupleSections OverloadedStrings NamedFieldPuns PatternSynonyms
+  default-extensions: FlexibleContexts TypeFamilies ConstraintKinds NamedFieldPuns LambdaCase
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2018
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
     , hashable
     , megaparsec
+    , regex-compat
     , text
     , text-metrics
-    , time
     , unordered-containers
   default-language: Haskell2010
 
@@ -88,16 +90,18 @@ test-suite aoc2018-test
       Paths_aoc2018
   hs-source-dirs:
       test
-  default-extensions: DeriveDataTypeable DeriveFunctor DeriveFoldable DeriveTraversable StandaloneDeriving FlexibleInstances FlexibleContexts MultiParamTypeClasses FunctionalDependencies TypeApplications TypeFamilies ConstraintKinds KindSignatures BangPatterns LambdaCase MultiWayIf TupleSections OverloadedStrings NamedFieldPuns PatternSynonyms
+  default-extensions: FlexibleContexts TypeFamilies ConstraintKinds NamedFieldPuns LambdaCase
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2018
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
     , hashable
     , hspec
     , megaparsec
+    , regex-compat
     , text
     , text-metrics
     , unordered-containers

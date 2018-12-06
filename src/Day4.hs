@@ -1,16 +1,16 @@
 {-# LANGUAGE ViewPatterns #-}
  module Day4
      ( 
-         day4
+        day4
        ,day4b
      ) where
 
-import Data.List (sortBy, sort, foldl')
+import Data.List (sortBy, sort, foldl', minimumBy)
 import Data.Function (on)
+import Data.Functor
 import Data.Void (Void)
 import Text.Megaparsec
 
-import Debug.Trace
 
 import qualified Data.HashMap.Strict as HM
 import qualified Text.Megaparsec.Char as C
@@ -37,8 +37,9 @@ justParse p s = case parse p "" s of
   
 guardShiftP :: Parser String GuardShift
 guardShiftP =
-  C.string "falls asleep" *> pure Sleep
-  <|> C.string "wakes up" *> pure WakeUp
+
+  (C.string "falls asleep" $> Sleep)
+  <|> (C.string "wakes up" $> WakeUp)
   <|> (C.string "Guard #" *> (Begin <$> signedIntP) <* takeWhile1P Nothing (const True))
 
 recordP :: Parser String LogRecord
@@ -58,20 +59,19 @@ space = L.space C.space1 empty empty
 
 
 day4 input =   (\(x,(y,_))-> x * y)
-               $ second (head . sortBy (flip compare `on` snd) . snd)
-               $ head
-               $ sortBy (flip compare `on` snd)
-               $ map (second (\(HM.toList -> xs) -> (sum $ map snd xs, xs)))
-               $ HM.toList
-               $ (\(x, y, z) -> x)
-               $ foldl' go (HM.empty, Nothing, Nothing)
-               $ sort
-               $ map (justParse recordP)
-               $ lines input                    
+               $ second (minimumBy (flip compare `on` snd) . snd)
+               $ minimumBy (flip compare `on` snd)
+                    (map (second (\ (HM.toList -> xs) -> (sum $ map snd xs, xs))) 
+                   $ HM.toList
+                   $ (\(x, y, z) -> x) 
+                   $ foldl' handle (HM.empty, Nothing, Nothing) 
+                   $ sort 
+                   $ map (justParse recordP) 
+                   $ lines input)
                 where
                     minsBetween :: LogRecord -> LogRecord -> [Int]
                     minsBetween sleep wake = [mins sleep .. mins wake - 1]
-                    f i sleepinfo wakeinfo hm =
+                    waken i sleepinfo wakeinfo hm =
                       foldl' (\h m -> HM.alter
                              (\case {Nothing -> Just (HM.fromList [(m, 1)]);
                                      Just g -> Just (HM.alter 
@@ -79,35 +79,34 @@ day4 input =   (\(x,(y,_))-> x * y)
                                                                   Just i -> Just (i + 1);}) m g)
                                     }
                              ) i h) hm (minsBetween sleepinfo wakeinfo)
-                    go (h, prev, cur) logRecord@LogRecord{info} = case info of
+                    handle (h, prev, cur) logRecord@LogRecord{info} = case info of
                       Begin i -> (h, Nothing, Just i)
                       Sleep -> (h, Just logRecord, cur)
                       WakeUp -> case (prev, cur) of
-                          (Just p, Just i) -> (f i p logRecord h, Nothing, Just i)
+                          (Just p, Just i) -> (waken i p logRecord h, Nothing, Just i)
                           _ -> error "How did I get here"
                 
 
 day4b:: String -> Int
 day4b input = uncurry (*) 
                 $ fst 
-                $ head
-                $ sortBy (flip compare `on` snd)
-                $ HM.toList
-                $ (\(x, y, z) -> x)
-                $ foldl' go (HM.empty, Nothing, Nothing)
-                $ sort
-                $ map (justParse recordP)
-                $ lines input
+                $ minimumBy (flip compare `on` snd)
+                    (HM.toList 
+                        $ (\ (x, y, z) -> x) 
+                        $ foldl' go (HM.empty, Nothing, Nothing) 
+                        $ sort 
+                        $ map (justParse recordP) 
+                        $ lines input)
   where
     minsBetween :: LogRecord -> LogRecord -> [Int]
     minsBetween sleep wake = [mins sleep .. mins wake - 1]
-    f i sleepinfo wakeinfo hm =
+    process i sleepinfo wakeinfo hm =
       foldl' (\h m -> HM.alter (\case {Nothing -> Just 1; Just k -> Just (k + 1)}) (i, m) h) 
             hm (minsBetween sleepinfo wakeinfo)
     go (h, prev, cur) record@LogRecord{info} = case info of
       Begin i -> (h, Nothing, Just i)
       Sleep -> (h, Just record, cur)
       WakeUp -> case (prev, cur) of
-        (Just p, Just i) -> (f i p record h, Nothing, Just i)
+        (Just p, Just i) -> (process i p record h, Nothing, Just i)
         _ -> error "How did I get here"
     
