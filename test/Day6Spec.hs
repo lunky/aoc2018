@@ -15,3 +15,9 @@ spec = do
             let  input = "1, 1\n1, 6\n8, 3\n3, 4\n5, 5\n8, 9\n"
             let expected = 17
             day6 input `shouldBe` expected
+    describe "Day6b" $ 
+        it "should run a test case" $ do
+            let  input = "1, 1\n1, 6\n8, 3\n3, 4\n5, 5\n8, 9\n"
+            let  input2 = 32 
+            let expected = 16
+            day6b input input2 `shouldBe` expected

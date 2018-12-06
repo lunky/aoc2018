@@ -20,7 +20,11 @@ day6 input =  maximum
           set = map(\y -> (y,closest y parsedInput)) grid
           
 
-day6b input = 0
+day6b input maxDistance = length 
+                $ filter (\(x,y)-> y < maxDistance) 
+                $ map (\y -> (y, sum $ distanceFrom y parsedInput) ) grid
+    where grid = getGrid parsedInput
+          parsedInput = parseInput input
 
 getGrid :: (Foldable t, Ord b, Num b, Enum b) => t (b, b) -> [(b, b)]
 getGrid input = grid min max
@@ -48,4 +52,7 @@ closest x xs = (\y -> if length y>1 then [] else take 1 y )
                  $ sortBy (\(_,y) (_,z)  -> compare y z ) 
                  $ map (\y -> (y, distance x y) ) xs
 
-    
+
+
+distanceFrom x = map (distance x)
+

@@ -39,5 +39,7 @@ main = do
     -- let answer = show $ day5b contents
     -- putStrLn ("day5b: " ++ answer)
     contents <- readFile "data/day6.txt"
-    let answer = show $ day6 contents
+    -- let answer = show $ day6 contents
+    -- putStrLn ("day6: " ++ answer)
+    let answer = show $ day6b contents 10000
     putStrLn ("day6: " ++ answer)
