@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b122d8bef35ace91da4c1c26fd0bfaa62b1b6f410524bd5bdd6576fea36ecad8
+-- hash: 0bf617960fd89864c17044463c846cf0de8a002aa98650d05af625c59b7f4eec
 
 name:           aoc2018
 version:        0.1.0.0
@@ -32,6 +32,7 @@ library
       Day3
       Day4
       Day5
+      Day6
   other-modules:
       Paths_aoc2018
   hs-source-dirs:
@@ -58,6 +59,7 @@ executable aoc2018-exe
       Day3
       Day4
       Day5
+      Day6
       Paths_aoc2018
   hs-source-dirs:
       app
@@ -87,6 +89,7 @@ test-suite aoc2018-test
       Day3Spec
       Day4Spec
       Day5Spec
+      Day6Spec
       Paths_aoc2018
   hs-source-dirs:
       test
