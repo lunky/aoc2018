@@ -33,11 +33,6 @@ removeThenReact :: Char -> String -> Int
 removeThenReact char input = length $ (\y -> react regex1 (0, y)) filteredChar 
     where filteredChar = filter (\y -> not$(y==char || (y == toUpper char))) input
     
-
-applyNtimes :: (Num n, Ord n) => n -> (a -> a) -> a -> a
-applyNtimes 1 f x = f x
-applyNtimes n f x = f (applyNtimes (n-1) f x)
-
 regexString = tail $ concatMap (\a -> ['|','(', toUpper a, a,')','|', '(', a, toUpper a, ')']) ['a'..'z']
 regex1 = mkRegex regexString
 regexsString = tail $ map (\a -> ['(', toUpper a, a,')','|', '(', a, toUpper a, ')']) ['a'..'z']
