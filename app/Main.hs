@@ -7,6 +7,7 @@ import Day4
 import Day5
 import Day6
 import Day7
+import Day8
 
 
 main :: IO ()
@@ -44,6 +45,12 @@ main = do
     -- putStrLn ("day6: " ++ answer)
     -- let answer = show $ day6b contents 10000
     -- putStrLn ("day6: " ++ answer)
-    contents <- readFile "data/day7.txt"
-    let answer = show $ day7 contents 
-    putStrLn ("day7: " ++ answer)
+    -- contents <- readFile "data/day7.txt"
+    -- let answer = show $ day7 contents 
+    -- putStrLn ("day7: " ++ answer)
+    -- contents <- readFile "data/day7.txt"
+    -- let answer = show $ day7b 60 5 contents 
+    -- putStrLn ("day7b: " ++ answer)
+    contents <- readFile "data/Day8.txt"
+    let answer = show $ day8 contents 
+    putStrLn ("day8: " ++ answer)
