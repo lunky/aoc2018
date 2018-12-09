@@ -54,3 +54,5 @@ main = do
     contents <- readFile "data/Day8.txt"
     let answer = show $ day8 contents 
     putStrLn ("day8: " ++ answer)
+    let answer = show $ day8b contents 
+    putStrLn ("day8: " ++ answer)

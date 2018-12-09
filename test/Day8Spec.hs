@@ -16,6 +16,6 @@ spec = do
             day8 input `shouldBe` expected
     describe "Day8b" $ 
         it "should run a test case" $ do
-            let input = ""
-            let expected = 0
+            let input = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2"
+            let expected = 66
             day8b input `shouldBe` expected

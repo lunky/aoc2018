@@ -5,21 +5,28 @@
      ) where
 
 
-data Tree a = Node [Int] [Tree a] deriving (Show) 
+data Tree a = Node [Tree a] [Int] deriving (Show) 
 
 day8 input = sumData $ fst $ buildNode $ parseInput input
-day8b input = 0
+day8b input = sumData' $ fst $ buildNode $ parseInput input
 
-sumData (Node payload children) = sum payload + (sum $ map (\y -> sumData y) children )
+sumData (Node children payload) = sum payload + (sum $ map (\y -> sumData y) children )
+
+sumData' (Node [] payload) = sum payload 
+sumData' (Node children payload) = sum $ map (\y -> sumData' (getNode y)) payload
+  where getNode offset
+         | offset == 0 = (Node [] [])
+         | offset > length children = (Node [] [])
+         | otherwise = children!!(offset - 1)
 
 buildNode (nKids:nMetadata: inputData) = 
  let (kids, rest) = buildChildren nKids [] inputData
- in (Node (take nMetadata rest) kids, (drop nMetadata rest))
+ in (Node kids (take nMetadata rest), (drop nMetadata rest))
 
 buildChildren 0 siblings inputData = (siblings,inputData)
 buildChildren nSiblings siblings inputData =
  let (child, rest) = buildNode (inputData)
- in buildChildren (nSiblings-1) ([child] ++ siblings) rest
+ in buildChildren (nSiblings-1) (siblings ++ [child]) rest
     
 parseInput :: String -> [Int]
 parseInput input = map read $ words input
