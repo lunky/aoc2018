@@ -5,7 +5,7 @@
        , turn
      ) where
 
-import Data.List (findIndex, maximumBy)
+import Data.List (findIndex, maximumBy, splitAt)
 import Data.Maybe (fromJust)
 import qualified Data.Map as Map
 
@@ -14,8 +14,7 @@ input = "9 players; last marble is worth 25 points"
 day9 input = snd $ maximumBy (\(_,x) (_,y) -> compare x y ) 
                  $ Map.toList
                  $ Map.fromListWith (+)
-                 $ map (\((_,_,x,_),index) -> (index,x))
-                 $ (\(players, marbles) -> zip  (take (marbles+1) $ turnForever ) (cycle [1..players]) )
+                 $ (\(players, marbles) -> zip  (cycle [1..players]) (take (marbles+1) $ map (\(_,_,y,_) -> y) $ turnForever ) )
                  $ parseInput input
                  
 day9b input = 0
@@ -29,13 +28,15 @@ deleteByIndex n xs = take n xs ++ (drop (n+1)) xs
 
 turnForever = iterate turn (0,0,0,[0])
 
+-- insertAt :: Int -> Int-> [Int] -> [Int] 
+insertAt z y xs = as ++ (y:bs)
+                  where (as,bs) = splitAt z xs
+                  
 turn :: (Int, Int, Int,[Int]) -> (Int, Int,Int,[Int])
-turn (0,0,0,[0]) = (1, 1, 1, [0,1])
-turn (1,1,1, [0,1]) = (2, 2, 2, [0,2,1])
 turn (index, position, score, list) 
  | (index+1)`mod` 23 == 0 = (index+1, list!!(findIdx'+1), index+1 + list!!findIdx', deleteByIndex findIdx' list )
  | otherwise = (index+1, index+1, 0, newList)
-  where newList = (take findIdx list) ++ index+1:(drop findIdx list)
+  where newList = insertAt findIdx (index+1) list 
         findIdx = case (findIndex (==position) list) of 
                     Nothing -> error "shouldn't be here"
                     Just i -> if (i+2>(length list)) then 
