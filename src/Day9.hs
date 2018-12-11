@@ -11,13 +11,20 @@ import qualified Data.Map as Map
 
 input = "9 players; last marble is worth 25 points"
 
-day9 input = snd $ maximumBy (\(_,x) (_,y) -> compare x y ) 
+day9 input =  uncurry day9common $ parseInput input
+                 
+day9common players marbles =  snd 
+                 $ maximumBy (\(_,x) (_,y) -> compare x y ) 
                  $ Map.toList
                  $ Map.fromListWith (+)
-                 $ (\(players, marbles) -> zip  (cycle [1..players]) (take (marbles+1) $ map (\(_,_,y,_) -> y) $ turnForever ) )
-                 $ parseInput input
+                 $ filter (\(_,y) -> y/=0)
+                 $ zip  (cycle [1..players]) 
+                 $ take (marbles+1) 
+                 $ map (\(_,_,y,_) -> y) 
+                 $ turnForever 
                  
-day9b input = 0
+day9b input =  (\(players,marbles) -> day9common players (marbles * 100)) 
+                 $ parseInput input
 
 parseInput :: String -> (Int, Int)
 parseInput input = (\y -> (read (y!!0), read (y!!6))) $ words input
@@ -28,9 +35,13 @@ deleteByIndex n xs = take n xs ++ (drop (n+1)) xs
 
 turnForever = iterate turn (0,0,0,[0])
 
--- insertAt :: Int -> Int-> [Int] -> [Int] 
+turnForever :: [(Int, Int, Int, [Int])]
 insertAt z y xs = as ++ (y:bs)
                   where (as,bs) = splitAt z xs
+                  
+every n xs = case drop (n-1) xs of
+              (y:ys) -> y : every n ys
+              [] -> []                  
                   
 turn :: (Int, Int, Int,[Int]) -> (Int, Int,Int,[Int])
 turn (index, position, score, list) 
