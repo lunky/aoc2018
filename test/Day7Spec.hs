@@ -9,16 +9,22 @@ spec = do
         it "should run a noop test" $ 
             1 `shouldBe` 1
             
-    describe "Day7" $ 
+    describe "Day7" $ do
         it "should run a test case" $ do
             let input = "Step C must be finished before step A can begin.\nStep C must be finished before step F can begin.\nStep A must be finished before step B can begin.\nStep A must be finished before step D can begin.\nStep B must be finished before step E can begin.\nStep D must be finished before step E can begin.\nStep F must be finished before step E can begin.\n"
             let expected = "CABDFE"
             day7 input `shouldBe` expected
+        it "should run a test case" $ do
+            let input = "Step C must be finished before step A can begin.\nStep C must be finished before step F can begin.\nStep A must be finished before step B can begin.\nStep A must be finished before step D can begin.\nStep B must be finished before step E can begin.\nStep D must be finished before step E can begin.\nStep F must be finished before step E can begin.\n"
+            let expected = "CABDFE"
+            day7a input `shouldBe` expected
     describe "Day7b" $ 
         it "should run a test case" $ do
             let input = "Step C must be finished before step A can begin.\nStep C must be finished before step F can begin.\nStep A must be finished before step B can begin.\nStep A must be finished before step D can begin.\nStep B must be finished before step E can begin.\nStep D must be finished before step E can begin.\nStep F must be finished before step E can begin.\n"
             let expected = 15 
-            day7b input `shouldBe` expected
+            let cost = 0
+            let workers = 2
+            day7b cost workers input `shouldBe` expected
 
     describe "Day 7 next" $ do
         it "should return the next char available" $ do
