@@ -58,13 +58,16 @@ main = do
     -- putStrLn ("day8: " ++ answer)
     -- let answer = show $ day8b contents 
     -- putStrLn ("day8: " ++ answer)
-    contents <- readFile "data/Day9.txt"
+    -- contents <- readFile "data/Day9.txt"
     -- let answer = show $ day9 contents 
     -- putStrLn ("day9: " ++ answer)
-    let answer = show $ day9b contents 
-    putStrLn ("day9b: " ++ answer)
+    -- let answer = show $ day9b contents 
+    -- putStrLn ("day9b: " ++ answer)
     -- let answer = show $ day9b contents 
     -- putStrLn ("day9: " ++ answer)
     contents <- readFile "data/Day10.txt"
-    let answer = show $ day10 contents 
-    putStrLn ("day10: " ++ answer)
+    let answer =  day10 contents 
+    putStrLn ("day10: " )
+    mapM_ putStrLn answer 
+    let answer =  show $ day10b contents 
+    putStrLn ("day10b: " ++ answer )
