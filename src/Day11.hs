@@ -25,6 +25,10 @@ sumPowerLevelsMap gridMap list = sum $ map (\y -> glookup gridMap y) list
 
 day11 input = fst $ maximumBy (\(a,b) (c,d) -> (compare b d)) $ map (\y -> (y, sumTbT input y))  getGrid
 
+getGrid :: [(Int,Int)]
+getGrid =  [ (x,y) | x <- [1..300], y <- [1..300]] 
+
+sumTbT serial start = sum $ map (\y -> getPowerLevel serial y) $ fst $ xByX (start,3)
 
 day11b serial = fst $ maximumBy (\(a,b) (c,d) -> compare b d) $ map (\y -> day11bt gmap y) $ getGrid
     where gmap = getGridMap serial
@@ -44,16 +48,12 @@ xByX :: ((Int,Int),Int) -> ([(Int,Int)],Int)
 xByX ((x,y),gridSize) = ([(x+a,y+b) | a<-[0..gridSize-1], b<-[0..gridSize-1]],gridSize)
                       
 squaresXByX :: (Int, Int) -> [((Int,Int),Int)]
-squaresXByX (x,y) = takeWhile (\((_,_),a) -> (a+x <= bound) && (a+y <= bound)) $ map (\z-> ((x,y),z)) [1..]
+squaresXByX (x,y) = takeWhile (\((_,_),a) -> (a+x <= bound+1) && (a+y <= bound+1)) $ map (\z-> ((x,y),z)) [1..]
     where bound = 300
-
-getGrid :: [(Int,Int)]
-getGrid =  [ (x,y) | x <- [1..300], y <- [1..300]] 
 
 getGridMap :: Int -> Map (Int,Int) Int
 getGridMap serial = Map.fromList $ map(\y -> (y,getPowerLevel serial y)) $ getGrid
 
-sumTbT serial start = sum $ map (\y -> getPowerLevel serial y) $ fst $ xByX (start,3)
 
 -- sumTbT' serial start x = sum $ map (\y -> getPowerLevel serial y) $ xByX (start,x)
 gridMap = getGridMap 18
