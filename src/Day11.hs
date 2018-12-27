@@ -48,8 +48,15 @@ squaresXByX (x,y) = takeWhile (\((_,_),a) -> (a+x <= bound+1) && (a+y <= bound+1
 getGridMap :: Int -> Map (Int,Int) Int
 getGridMap serial = Map.fromList $ map(\y -> (y,getPowerLevel serial y)) $ getGrid
 
+getNext :: ((Int,Int),Int) -> [(Int,Int)]
+getNext ((x,y), 1) = [(x,y)]
+getNext ((x,y), size) = [(x+a,y+size-1) | a <- [0..size-1]] ++ [(x+size-1,y+a) | a <- [0..size-2]]
+
+tryThree serial = map (\z -> foldr (\y acc -> (acc+sumPowerLevels serial (getNext y))) 0 $ squaresXByX  z) getGrid
+
 
 --gridMap = getGridMap 18
+-- getLargestSquare serial point = foldr (\y acc -> get)
 
 glookup :: Map (Int,Int) Int -> (Int,Int) -> Int 
 glookup gmap loc = gmap Map.! loc
