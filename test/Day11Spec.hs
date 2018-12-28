@@ -55,4 +55,16 @@ spec = do
     --         let input = 18 
     --         let expected = (90,(269,16))
     --         day11b input `shouldBe` expected
-
+    describe "tryThree" $ do
+        it " should give me test case 1" $ do 
+            let serial = 18
+            let point = (90,269)
+            let expected = (16,113)
+            tryThree serial point `shouldBe` expected
+        it " should give me test case 2" $ do 
+            let serial = 42
+            let point = (232,251)
+            let expected = (12,119)
+            tryThree serial point `shouldBe` expected
+        
+        

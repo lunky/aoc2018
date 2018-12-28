@@ -4,6 +4,7 @@
        , day11b
        , getPowerLevel
        , sumTbT
+       , tryThree
      ) where
      
 import Data.List (maximumBy)
@@ -52,9 +53,19 @@ getNext :: ((Int,Int),Int) -> [(Int,Int)]
 getNext ((x,y), 1) = [(x,y)]
 getNext ((x,y), size) = [(x+a,y+size-1) | a <- [0..size-1]] ++ [(x+size-1,y+a) | a <- [0..size-2]]
 
-tryThree serial = map (\z -> foldr (\y acc -> (acc+sumPowerLevels serial (getNext y))) 0 $ squaresXByX  z) getGrid
+day11bthree serial = maximumBy (\(_,_,a) (_,_,b) -> compare a b) $ map (\y ->(\(a,b) -> (y,a,b)) $ tryThree serial y) $ getGrid
+-- tryThree :: Int -> (Int, Int) -> (Int, Int, Int)
+tryThree serial point = (\(_, b, _) -> b ) 
+                        $ foldr (\y (a,b,c) ->(\z -> (a+1, maxBySnd b (a+1,c+z), c+z)) $ (sumPowerLevels serial $ getNext y) ) (0,(0,0),0) 
+                        $ reverse 
+                        $ squaresXByX point
 
-
+-- tryThree serial point = foldr (\y (a,b,c) ->(\z -> (a+1, max b (c+z), c+z)) $ (sumPowerLevels 18 $ getNext y) ) (0,0,0) 
+--                               $ reverse 
+--                               $ squaresXByX point
+maxBySnd a b = case compare (snd a) (snd b) of
+                        GT -> a
+                        _  -> b
 --gridMap = getGridMap 18
 -- getLargestSquare serial point = foldr (\y acc -> get)
 
