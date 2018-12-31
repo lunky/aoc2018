@@ -29,13 +29,13 @@ spec = do
             let input2 = (101,153)
             let expected = 4
             getPowerLevel input input2 `shouldBe` expected
-    describe "day11 sumTbT" $ do
+    describe "day11 sumTbT" $ 
         it "should match given test case" $ do
             let input = 42
             let input2 = (21,61)
             let expected = 30
             sumTbT input input2 `shouldBe` expected
-    describe "day11 sumTbT" $ do
+    describe "day11 sumTbT" $ 
         it "should match given test case" $ do
             let input = 18 
             let input2 =  (33,45)
