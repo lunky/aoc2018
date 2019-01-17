@@ -14,6 +14,7 @@ input = 8
 
 day11 input = fst $ maximumBy (\(a,b) (c,d) -> compare b d) $ map (\y -> (y, sumTbT input y))  getGrid
 
+-- this works... but it took me about 88 minutes to run
 day11b serial = (\((a,b),c,d) -> init  $ tail  $ show [a,b,c] )  
                         $ maximumBy (\(_,_,a) (_,_,b) -> compare a b) 
                         $ map (\y ->(\(a,b) -> (y,a,b)) $ pointMaximum serial y)  getGrid

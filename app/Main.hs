@@ -12,6 +12,7 @@ import Day9
 import Day10
 import Day11
 import Day12
+import Day13
 
 
 main :: IO ()
@@ -78,6 +79,11 @@ main = do
     -- putStrLn ("day11: " ++ answer)
     -- let answer = show $ day11b contents 
     -- putStrLn ("day11b: " ++ answer)
-    contents <- readFile "data/day12.txt"
-    let answer = show $ day12 contents 
-    putStrLn ("day12: " ++ answer)
+    -- contents <- readFile "data/day12.txt"
+    -- let answer = show $ day12 contents 
+    -- putStrLn ("day12: " ++ answer)
+    contents <- readFile "data/day13.txt"
+    -- let answer = show $ day13 contents 
+    -- putStrLn ("day13: " ++ answer)
+    let answer = show $ day13b contents 
+    putStrLn ("day13b: " ++ answer)
