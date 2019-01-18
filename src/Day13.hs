@@ -36,7 +36,8 @@ day13b' ::  [Cart] -> Map (Int, Int) Char  -> (Int,Int)
 day13b' carts emptyMap
      | length carts == 1 =  cartLoc $ head carts
      | otherwise = day13b' nextCarts emptyMap
-    where nextCarts = map snd $ Map.toList $ foldl' (\y x -> moveCartOnMap x y emptyMap) cartMap ( sortBy sort' carts)
+    where nextCarts = map snd  $ Map.toList 
+                        $ foldl' (\y x -> moveCartOnMap x y emptyMap) cartMap ( sortBy sort' carts)
           cartMap = getCartMap carts
 
     
@@ -44,6 +45,7 @@ day13b' carts emptyMap
 data DirectionChoice = Left | Straight | Right 
                deriving (Enum, Bounded, Eq, Show, Ord)
 
+-- add item if we haven't seen it before
 dup :: Ord a => [a] -> Maybe a
 dup xs = dup' xs Set.empty
   where dup' [] _ = Nothing
@@ -146,13 +148,13 @@ moveCart (Cart (x,y) currDirection choice) emptyMap = Cart nextLoc nextDir nextC
 moveCartOnMap cart cartMap emptyMap = do
     let (Cart curLoc a b) = cart
     let newCart @ (Cart newLoc a b) = moveCart cart emptyMap
-    if Map.member curLoc cartMap then
+    if not (Map.member curLoc cartMap) then
+        cartMap
+    else
         if Map.member newLoc cartMap  then
             Map.delete curLoc $ Map.delete newLoc cartMap 
         else
             Map.delete curLoc $ Map.insert newLoc newCart cartMap 
-    else
-        cartMap
 
 
 replaceCart '<' = '-'
