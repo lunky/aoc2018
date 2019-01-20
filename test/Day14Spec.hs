@@ -17,10 +17,26 @@ spec = do
             let expected = "5158916779"
             day14 input `shouldBe` expected
         it "should match the simple test case" $ do
-            pendingWith "Not ready to run"
             let input =  2018
             let expected = "5941429882"
             day14 input `shouldBe` expected
+    describe "day14b" $ do
+        it "should match the simple test case" $ do
+            let input =  "51589"
+            let expected = 9
+            day14b input `shouldBe` expected
+        it "should match the simple test case" $ do
+            let input = "01245" 
+            let expected = 5
+            day14b input `shouldBe` expected
+        it "should match the simple test case" $ do
+            let input = "92510" 
+            let expected = 18
+            day14b input `shouldBe` expected
+        it "should match the simple test case" $ do
+            let input = "59414" 
+            let expected = 2018
+            day14b input `shouldBe` expected
     describe "nextBoard" $ do
         it "should match the first test case" $ do
             let input = ScoreBoard 0 1 (Seq.fromList[3,7])

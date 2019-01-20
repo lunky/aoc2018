@@ -88,5 +88,7 @@ main = do
     -- putStrLn ("day13: " ++ answer)
     -- let answer = show $ day13b contents 
     -- putStrLn ("day13b: " ++ answer)
-    let answer = show $ day14 440231
-    putStrLn ("day14: " ++ answer)
+    -- let answer = show $ day14 440231
+    -- putStrLn ("day14: " ++ answer)
+    let answer = show $ day14b "440231"
+    putStrLn ("day14b: " ++ answer)

@@ -7,13 +7,14 @@
      ) where
      
 import Data.Sequence (Seq)
-import Data.Sequence as Seq
+import qualified Data.Sequence as Seq
 import Data.Foldable (toList)
-
 import Data.Char (digitToInt, intToDigit)
+import Data.List (isInfixOf, zip, tails, isPrefixOf, findIndex)
+import Data.Maybe (fromJust)
 
 day14 :: Int -> String
-day14 input = Prelude.take 10
+day14 input = take 10
             $ map intToDigit
             $ toList
             $(\(ScoreBoard a b board) -> Seq.drop input board) 
@@ -22,11 +23,22 @@ day14 input = Prelude.take 10
             $ iterate nextBoard (ScoreBoard 0 1 (Seq.fromList[3,7]))
 
 
-day14b :: Int -> String 
-day14b input = ""
-          
+day14b :: String -> Int
+day14b input = fromJust $ findSubstring input 
+            $ head
+            $ dropWhile (\y->  not $ isInfixOf input (drop ((length y) - len) y)) 
+            $ map (map intToDigit)
+            $ map ( \(ScoreBoard _ _ y) -> toList y)
+            $ iterate nextBoard (ScoreBoard 0 1 (Seq.fromList[3,7]))
+    where len = length input
+            
+findSubstring :: Eq a => [a] -> [a] -> Maybe Int
+findSubstring pat str = findIndex (isPrefixOf pat) (tails str)           
 
-data ScoreBoard = ScoreBoard { elfA :: Int, lfB :: Int, scores :: Seq Int }
+findSubstring' pat str = length pat - (fromJust $ findSubstring (reverse pat) (reverse str))
+
+
+data ScoreBoard = ScoreBoard { elfA :: Int, elfB :: Int, scores :: Seq Int }
     deriving (Show,Eq)
 
 -- test = ScoreBoard 1  4  ( Seq.fromList [])
