@@ -24,20 +24,19 @@ day14 input = take 10
 
 
 day14b :: String -> Int
-day14b input = (\(x,y) -> x+y ) $ (\(x,y)->(x,fromJust$ findSubstring input y))
+day14b input = uncurry (+) $ (\(x,y)->(x,fromJust$ findSubstring input y))
             $ head
-            $ dropWhile (\(x,y)->  not $ isInfixOf input (drop ((length y) - len) y)) 
-            $ map ( \(ScoreBoard _ _ y) -> ((length y) - len, map intToDigit 
+            $ dropWhile (\(x,y)->  not $ isInfixOf input (drop (length y - len) y)) 
+            $ map ( \(ScoreBoard _ _ y) -> (length y - len, map intToDigit 
                                                     $ toList 
-                                                    $ Seq.drop ((length y) - len) y))
-            -- $ map ( \(ScoreBoard _ _ y) -> toList y)
+                                                    $ Seq.drop (length y - len) y))
             $ iterate nextBoard (ScoreBoard 0 1 (Seq.fromList[3,7]))
     where len = length input + 1  -- potentially +1
             
 findSubstring :: Eq a => [a] -> [a] -> Maybe Int
 findSubstring pat str = findIndex (isPrefixOf pat) (tails str)           
 
-findSubstring' pat str = length pat - (fromJust $ findSubstring (reverse pat) (reverse str))
+findSubstring' pat str = length pat - fromJust (findSubstring (reverse pat) (reverse str))
 
 
 data ScoreBoard = ScoreBoard { elfA :: Int, elfB :: Int, scores :: Seq Int }
