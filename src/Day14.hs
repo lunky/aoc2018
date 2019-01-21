@@ -24,13 +24,15 @@ day14 input = take 10
 
 
 day14b :: String -> Int
-day14b input = fromJust $ findSubstring input 
+day14b input = (\(x,y) -> x+y ) $ (\(x,y)->(x,fromJust$ findSubstring input y))
             $ head
-            $ dropWhile (\y->  not $ isInfixOf input (drop ((length y) - len) y)) 
-            $ map (map intToDigit)
-            $ map ( \(ScoreBoard _ _ y) -> toList y)
+            $ dropWhile (\(x,y)->  not $ isInfixOf input (drop ((length y) - len) y)) 
+            $ map ( \(ScoreBoard _ _ y) -> ((length y) - len, map intToDigit 
+                                                    $ toList 
+                                                    $ Seq.drop ((length y) - len) y))
+            -- $ map ( \(ScoreBoard _ _ y) -> toList y)
             $ iterate nextBoard (ScoreBoard 0 1 (Seq.fromList[3,7]))
-    where len = length input
+    where len = length input + 1  -- potentially +1
             
 findSubstring :: Eq a => [a] -> [a] -> Maybe Int
 findSubstring pat str = findIndex (isPrefixOf pat) (tails str)           
