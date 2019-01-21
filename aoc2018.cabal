@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d21a09ae34a2a30a18c10c735a3bc7ce670d78001f063d57479a7845c5cabfab
+-- hash: 70bd028c8522b6f5e4da6cf7599ad89b6a78cfdc096e2968fa5acefb9a0d6d1e
 
 name:           aoc2018
 version:        0.1.0.0
@@ -33,6 +33,7 @@ library
       Day12
       Day13
       Day14
+      Day15
       Day2
       Day3
       Day4
@@ -56,6 +57,7 @@ library
     , regex-compat
     , text
     , text-metrics
+    , time
     , unordered-containers
   default-language: Haskell2010
 
@@ -68,6 +70,7 @@ executable aoc2018-exe
       Day12
       Day13
       Day14
+      Day15
       Day2
       Day3
       Day4
@@ -93,6 +96,7 @@ executable aoc2018-exe
     , regex-compat
     , text
     , text-metrics
+    , time
     , unordered-containers
   default-language: Haskell2010
 
@@ -105,6 +109,7 @@ test-suite aoc2018-test
       Day12Spec
       Day13Spec
       Day14Spec
+      Day15Spec
       Day1Spec
       Day2Spec
       Day3Spec
@@ -131,5 +136,6 @@ test-suite aoc2018-test
     , regex-compat
     , text
     , text-metrics
+    , time
     , unordered-containers
   default-language: Haskell2010

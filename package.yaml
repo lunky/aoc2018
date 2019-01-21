@@ -30,6 +30,7 @@ dependencies:
 - text-metrics
 - array
 - regex-compat
+- time
 
 default-extensions:
 - FlexibleContexts

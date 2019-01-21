@@ -1,5 +1,7 @@
 module Main where
 
+import Data.Time
+
 import Day1
 import Day2
 import Day3
@@ -14,10 +16,23 @@ import Day11
 import Day12
 import Day13
 import Day14
+import Day15
+
+-- timeStamp :: IO ()
+timeStamp f = do 
+    c <- getCurrentTime                  --  2009-04-21 14:25:29.5585588 UTC 
+    print c
+    f
+    c <- getCurrentTime                  --  2009-04-21 14:25:29.5585588 UTC 
+    print c
 
 
 main :: IO ()
 main = do 
+    timeStamp runDays
+
+runDays :: IO ()
+runDays = do
     -- contents <- readFile "data/day1.txt"
     -- let answer = show $ day1 contents
     -- putStrLn ("day1: " ++ answer)
@@ -90,5 +105,8 @@ main = do
     -- putStrLn ("day13b: " ++ answer)
     -- let answer = show $ day14 440231
     -- putStrLn ("day14: " ++ answer)
-    let answer = show $ day14b "440231"
+    -- let answer = show $ day14b "440231"
+    -- putStrLn ("day14b: " ++ answer)
+    contents <- readFile "data/day15.txt"
+    let answer = show $ day15 contents
     putStrLn ("day14b: " ++ answer)
