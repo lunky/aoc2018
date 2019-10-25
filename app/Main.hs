@@ -17,6 +17,7 @@ import Day12
 import Day13
 import Day14
 import Day15
+import Day18
 
 -- timeStamp :: IO ()
 timeStamp f = do 
@@ -28,7 +29,7 @@ timeStamp f = do
 
 
 main :: IO ()
-main = do 
+main = 
     timeStamp runDays
 
 runDays :: IO ()
@@ -107,6 +108,11 @@ runDays = do
     -- putStrLn ("day14: " ++ answer)
     -- let answer = show $ day14b "440231"
     -- putStrLn ("day14b: " ++ answer)
-    contents <- readFile "data/day15.txt"
-    let answer = show $ day15 contents
-    putStrLn ("day14b: " ++ answer)
+    --contents <- readFile "data/day15.txt"
+    --let answer = show $ day15 contents
+    --putStrLn ("day14b: " ++ answer)
+    contents <- readFile "data/day18.txt"
+    let answer = show $ day18 contents
+    putStrLn ("day18: " ++ answer)
+    let answer = show $ day18b contents
+    putStrLn ("day18b: " ++ answer)

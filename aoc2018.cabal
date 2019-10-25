@@ -1,10 +1,8 @@
-cabal-version: 1.12
-
--- This file has been generated from package.yaml by hpack version 0.31.1.
+-- This file has been generated from package.yaml by hpack version 0.28.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 70bd028c8522b6f5e4da6cf7599ad89b6a78cfdc096e2968fa5acefb9a0d6d1e
+-- hash: fa8d8ee2830ce9584d69dd0eec7c0fa6add544bea42cf4f4dba12b0dd1d757cb
 
 name:           aoc2018
 version:        0.1.0.0
@@ -17,9 +15,10 @@ copyright:      2018 Author name here
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
+cabal-version:  >= 1.10
 extra-source-files:
-    README.md
     ChangeLog.md
+    README.md
 
 source-repository head
   type: git
@@ -34,6 +33,7 @@ library
       Day13
       Day14
       Day15
+      Day18
       Day2
       Day3
       Day4
@@ -71,6 +71,7 @@ executable aoc2018-exe
       Day13
       Day14
       Day15
+      Day18
       Day2
       Day3
       Day4
@@ -110,6 +111,7 @@ test-suite aoc2018-test
       Day13Spec
       Day14Spec
       Day15Spec
+      Day18Spec
       Day1Spec
       Day2Spec
       Day3Spec

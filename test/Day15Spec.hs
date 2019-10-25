@@ -4,7 +4,7 @@ import Day15
 import Test.Hspec
 
 spec :: Spec
-spec = do
+spec = 
     describe "Lib" $ 
         it "should runa noop test" $ 
             1 `shouldBe` 1
